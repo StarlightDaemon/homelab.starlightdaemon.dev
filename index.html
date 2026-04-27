@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed hardware and software specification for the Starlight homelab.">
+    <meta name="author" content="StarlightDaemon">
+    <meta name="theme-color" content="#090f1c">
+    <link rel="canonical" href="https://homelab.starlightdaemon.dev/">
+    <title>StarlightLab | Homelab Architecture</title>
+    <link rel="stylesheet" href="css/homelab.css?v=1.0.1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="lab-shell">
+        <nav class="lab-nav" aria-label="Primary">
+            <div class="lab-nav-inner">
+                <a href="https://www.starlightdaemon.dev/" class="lab-brand"
+                    aria-label="Return to StarlightDaemon home page">
+                    <img src="assets/thinker-logo.png" alt="StarlightDaemon logo" class="lab-brand-logo">
+                    <span class="lab-brand-wordmark">Starlight<span>Lab</span></span>
+                </a>
+
+                <div class="lab-nav-links">
+                    <a href="#unraid">Starlight NAS</a>
+                    <a href="#proxmox">Starlight Cluster</a>
+                    <a href="#pipeline">Workflows</a>
+                </div>
+
+                <button class="lab-menu-button" type="button" aria-expanded="false" aria-controls="mobileMenu"
+                    aria-label="Toggle navigation">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+
+            <div class="lab-mobile-menu" id="mobileMenu" hidden>
+                <a href="#unraid">Starlight NAS</a>
+                <a href="#proxmox">Starlight Cluster</a>
+                <a href="#pipeline">Workflows</a>
+            </div>
+        </nav>
+
+        <header class="lab-hero">
+            <div class="lab-hero-badge">
+                <i data-lucide="activity"></i>
+                <span>Architecture Reference v5.2</span>
+            </div>
+            <h1>Starlight Homelab Architecture</h1>
+            <p>
+                Detailed hardware and software specification for the Starlight homelab ecosystem, converted into a
+                static operational reference page.
+            </p>
+
+            <div class="lab-hero-actions">
+                <a href="#unraid" class="lab-button lab-button-primary">Explore the Stack</a>
+                <a href="https://www.starlightdaemon.dev/" class="lab-button lab-button-secondary">Return to Base</a>
+            </div>
+
+            <div class="lab-stat-row" aria-label="Architecture summary">
+                <article class="lab-stat-card">
+                    <span class="lab-stat-label">Storage</span>
+                    <strong>84 TB Raw</strong>
+                    <p>Parity-protected Unraid array with SSD cache.</p>
+                </article>
+                <article class="lab-stat-card">
+                    <span class="lab-stat-label">Compute</span>
+                    <strong>3 Proxmox Nodes</strong>
+                    <p>Mixed Intel hosts for media, services, and AI workloads.</p>
+                </article>
+                <article class="lab-stat-card">
+                    <span class="lab-stat-label">Ingress</span>
+                    <strong>Cloudflare + NPM</strong>
+                    <p>Zero-trust tunnel, managed DNS, reverse proxy, and SSL.</p>
+                </article>
+            </div>
+        </header>
+
+        <main class="lab-main">
+            <section class="lab-section" id="unraid">
+                <div class="lab-section-title">
+                    <div class="lab-section-icon">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <div>
+                        <p>Storage Layer</p>
+                        <h2>Unraid: Starlight NAS</h2>
+                    </div>
+                </div>
+
+                <div class="lab-grid lab-grid-unraid">
+                    <article class="lab-panel lab-panel-emerald">
+                        <div class="lab-panel-head">
+                            <h3>
+                                <i data-lucide="settings-2"></i>
+                                Hardware Specifications
+                            </h3>
+                        </div>
+                        <div class="lab-spec-list">
+                            <div class="lab-spec-item">
+                                <span>Motherboard</span>
+                                <strong>MSI B450 TOMAHAWK MAX</strong>
+                            </div>
+                            <div class="lab-spec-item">
+                                <span>Processor</span>
+                                <strong>AMD Ryzen 5 3600 (6-Core @ 3.60GHz)</strong>
+                            </div>
+                            <div class="lab-spec-item">
+                                <span>Memory</span>
+                                <strong>64 GB DDR4</strong>
+                            </div>
+                            <div class="lab-spec-item lab-spec-item-highlight">
+                                <span>Storage Cluster</span>
+                                <strong>~84 TB Raw Capacity</strong>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="lab-panel lab-panel-emerald">
+                        <div class="lab-panel-head">
+                            <h3>
+                                <i data-lucide="hard-drive"></i>
+                                Array Health &amp; Parity
+                            </h3>
+                        </div>
+
+                        <div class="lab-storage-grid">
+                            <div>
+                                <div class="lab-meter-head">
+                                    <span>Array Utilization</span>
+                                    <strong>72% Overall</strong>
+                                </div>
+                                <div class="lab-meter" aria-label="Array utilization 72 percent">
+                                    <span class="lab-meter-fill" style="width: 72%;"></span>
+                                </div>
+
+                                <div class="lab-disk-list">
+                                    <div class="lab-disk-row">
+                                        <strong>Parity (ST26000)</strong>
+                                        <span>26 TB</span>
+                                        <em class="state-info">Healthy</em>
+                                    </div>
+                                    <div class="lab-disk-row">
+                                        <strong>Disk 1 (ST26000)</strong>
+                                        <span>26 TB</span>
+                                        <em class="state-good">Healthy</em>
+                                    </div>
+                                    <div class="lab-disk-row">
+                                        <strong>Disk 2 (ST18000)</strong>
+                                        <span>18 TB</span>
+                                        <em class="state-good">Healthy</em>
+                                    </div>
+                                    <div class="lab-disk-row">
+                                        <strong>Disk 3 (WD140)</strong>
+                                        <span>14 TB</span>
+                                        <em class="state-good">Healthy</em>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lab-reliability-card">
+                                <h4>Array Reliability</h4>
+                                <p>
+                                    Starlight NAS uses single-drive parity protection. This architecture allows a
+                                    single disk failure without data loss, while scheduled parity checks protect
+                                    consistency across the array.
+                                </p>
+                                <ul class="lab-note-list">
+                                    <li>
+                                        <i data-lucide="zap"></i>
+                                        <span>SSD Cache (512GB) for appdata and ingress</span>
+                                    </li>
+                                    <li>
+                                        <i data-lucide="database"></i>
+                                        <span>XFS formatted data disks</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="lab-section" id="proxmox">
+                <div class="lab-section-title">
+                    <div class="lab-section-icon lab-section-icon-blue">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <div>
+                        <p>Compute Fabric</p>
+                        <h2>Proxmox Cluster: Starlight</h2>
+                    </div>
+                </div>
+
+                <div class="lab-node-grid">
+                    <article class="lab-node-card lab-node-primary">
+                        <div class="lab-node-head">
+                            <div>
+                                <h3>daemon1</h3>
+                                <p>Main Control Node</p>
+                            </div>
+                            <span class="lab-node-badge">Main Node</span>
+                        </div>
+
+                        <div class="lab-node-specs">
+                            <div><span>CPU</span><strong>8 x Intel i5-10210U @ 1.60GHz</strong></div>
+                            <div><span>RAM</span><strong>12GB DDR4</strong></div>
+                            <div><span>Storage</span><strong>512GB ADATA NVMe (LVM)</strong></div>
+                        </div>
+
+                        <div class="lab-service-list">
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 219</div>
+                                <h4>cloudflared</h4>
+                                <p class="lab-service-role">Zero-Trust Tunneling</p>
+                                <p>Creates a secure outbound-only connection to Cloudflare, removing the need for open
+                                    router ports.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 105</div>
+                                <h4>nginxproxymanager</h4>
+                                <p class="lab-service-role">Reverse Proxy &amp; SSL</p>
+                                <p>Routes incoming tunnel traffic to internal services and manages certificates.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 106</div>
+                                <h4>seerr</h4>
+                                <p class="lab-service-role">Request Management</p>
+                                <p>The primary request portal for users, feeding the automated search and download
+                                    sequence.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 103</div>
+                                <h4>prowlarr</h4>
+                                <p class="lab-service-role">Indexer Manager</p>
+                                <p>Centralizes indexer search configuration across movie and TV automation tools.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 101</div>
+                                <h4>flaresolverr</h4>
+                                <p class="lab-service-role">Anti-Bot Solution</p>
+                                <p>Solves Cloudflare challenges for automated queries so indexers remain accessible.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 104</div>
+                                <h4>cloudflare-ddns</h4>
+                                <p class="lab-service-role">Dynamic DNS Sync</p>
+                                <p>Keeps Cloudflare records current when the home public IP changes.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 218</div>
+                                <h4>wizarr</h4>
+                                <p class="lab-service-role">User Onboarding</p>
+                                <p>Invitation and setup flow for users joining the Starlight ecosystem.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 222</div>
+                                <h4>homebox</h4>
+                                <p class="lab-service-role">Inventory Tracking</p>
+                                <p>Tracks serials, hardware placement, and warranty metadata across the lab.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 229</div>
+                                <h4>myspeed</h4>
+                                <p class="lab-service-role">ISP Benchmarking</p>
+                                <p>Measures bandwidth and latency over time to identify service quality drift.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 100</div>
+                                <h4>karakeep</h4>
+                                <p class="lab-service-role">Karaoke Media Host</p>
+                                <p>Dedicated management and streaming host for the karaoke media library.</p>
+                            </article>
+                        </div>
+                    </article>
+
+                    <article class="lab-node-card">
+                        <div class="lab-node-head">
+                            <div>
+                                <h3>daemon2</h3>
+                                <p>Media &amp; AI Compute</p>
+                            </div>
+                        </div>
+
+                        <div class="lab-node-specs">
+                            <div><span>CPU</span><strong>16 x 11th Gen Intel i7-11800H @ 2.30GHz</strong></div>
+                            <div><span>RAM</span><strong>32GB DDR4</strong></div>
+                            <div><span>Storage</span><strong>512GB Micron NVMe + 1TB Samsung 970 EVO Plus</strong></div>
+                        </div>
+
+                        <div class="lab-service-list">
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 102</div>
+                                <h4>jellyfin</h4>
+                                <p class="lab-service-role">Primary Media Server</p>
+                                <p>The core playback engine for movies and TV, with CPU-backed transcoding for remote
+                                    and mobile clients.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 110</div>
+                                <h4>ollama</h4>
+                                <p class="lab-service-role">Local AI LLM</p>
+                                <p>Hosts private local models for offline AI workflows and lab-side experimentation.</p>
+                            </article>
+                        </div>
+                    </article>
+
+                    <article class="lab-node-card">
+                        <div class="lab-node-head">
+                            <div>
+                                <h3>daemon3</h3>
+                                <p>Service Node</p>
+                            </div>
+                        </div>
+
+                        <div class="lab-node-specs">
+                            <div><span>CPU</span><strong>8 x 11th Gen Intel i5-1135G7 @ 2.40GHz</strong></div>
+                            <div><span>RAM</span><strong>16GB DDR4</strong></div>
+                            <div><span>Storage</span><strong>256GB SK Hynix NVMe + 2TB PNY SSD</strong></div>
+                        </div>
+
+                        <div class="lab-service-list">
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 232</div>
+                                <h4>audiobookshelf</h4>
+                                <p class="lab-service-role">Audiobook Server</p>
+                                <p>High-fidelity library manager and player for audiobooks and podcasts with
+                                    multi-user progress tracking.</p>
+                            </article>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="lab-section" id="pipeline">
+                <div class="lab-section-title">
+                    <div class="lab-section-icon lab-section-icon-amber">
+                        <i data-lucide="refresh-cw"></i>
+                    </div>
+                    <div>
+                        <p>Operations Flow</p>
+                        <h2>Media Workflow Workflows</h2>
+                    </div>
+                </div>
+
+                <div class="lab-tab-row" role="tablist" aria-label="Media workflow tabs">
+                    <button class="lab-tab is-active" type="button" role="tab" id="tab-movies" aria-selected="true"
+                        aria-controls="panel-movies" data-tab-target="movies">
+                        <i data-lucide="play"></i>
+                        <span>Movie Pipeline</span>
+                    </button>
+                    <button class="lab-tab" type="button" role="tab" id="tab-shows" aria-selected="false"
+                        aria-controls="panel-shows" data-tab-target="shows">
+                        <i data-lucide="tv"></i>
+                        <span>TV Pipeline</span>
+                    </button>
+                    <button class="lab-tab" type="button" role="tab" id="tab-books" aria-selected="false"
+                        aria-controls="panel-books" data-tab-target="books">
+                        <i data-lucide="book-open"></i>
+                        <span>Audiobook Pipeline</span>
+                    </button>
+                </div>
+
+                <div class="lab-pipeline-card">
+                    <div class="lab-flow-panel is-active" id="panel-movies" role="tabpanel" aria-labelledby="tab-movies"
+                        data-tab-panel="movies">
+                        <div class="lab-flow-grid">
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-blue"><i data-lucide="search"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>1. Discovery</span>
+                                    <h3>Seerr</h3>
+                                    <p>User initiates request. Seerr handles approval logic and pushes to Radarr.</p>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-sky"><i data-lucide="settings-2"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>2. Intelligence</span>
+                                    <h3>Radarr (HD/UHD)</h3>
+                                    <p>Prowlarr searches indexers. Radarr selects high-quality releases.</p>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-indigo"><i data-lucide="download"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>3. Transmission</span>
+                                    <h3>qBit VPN Movies</h3>
+                                    <p>Files land in a temporary staging share through the VPN path.</p>
+                                    <code>/moviesingress</code>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-emerald"><i data-lucide="refresh-cw"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>4. Processing</span>
+                                    <h3>Radarr Move</h3>
+                                    <p>File is renamed, cleaned, and hardlinked into the main array.</p>
+                                    <code>/movies</code>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-violet"><i data-lucide="play"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>5. Delivery</span>
+                                    <h3>Jellyfin</h3>
+                                    <p>Server detects new media on Unraid and indexes for playback.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="lab-flow-panel" id="panel-shows" role="tabpanel" aria-labelledby="tab-shows" hidden
+                        data-tab-panel="shows">
+                        <div class="lab-flow-grid">
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-indigo"><i data-lucide="search"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>1. Discovery</span>
+                                    <h3>Seerr</h3>
+                                    <p>Request is approved and sent to Sonarr for series management.</p>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-blue"><i data-lucide="tv"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>2. Logic</span>
+                                    <h3>Sonarr</h3>
+                                    <p>Monitors seasons and episodes while using Prowlarr for release discovery.</p>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-sky"><i data-lucide="download"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>3. Transmission</span>
+                                    <h3>qBit VPN Shows</h3>
+                                    <p>Downloads season packs and episodes into the TV staging folder.</p>
+                                    <code>/showsingress</code>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-emerald"><i data-lucide="refresh-cw"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>4. Processing</span>
+                                    <h3>Sonarr Move</h3>
+                                    <p>Organizes files into season folders and hardlinks them to the final library.</p>
+                                    <code>/shows</code>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-violet"><i data-lucide="play"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>5. Delivery</span>
+                                    <h3>Jellyfin</h3>
+                                    <p>Metadata is scraped and content is served to home and remote clients.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="lab-flow-panel" id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden
+                        data-tab-panel="books">
+                        <div class="lab-flow-grid">
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-amber"><i data-lucide="download"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>1. Intake</span>
+                                    <h3>Manual / Automation</h3>
+                                    <p>Audiobook files land in the dedicated intake share.</p>
+                                    <code>/audiobooksingress</code>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-orange"><i data-lucide="settings-2"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>2. Intelligence</span>
+                                    <h3>Shelfmark</h3>
+                                    <p>Applies metadata cleanup and organizes the final directory structure.</p>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-emerald"><i data-lucide="database"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>3. Storage</span>
+                                    <h3>Unraid</h3>
+                                    <p>Organized books are stored in the parity-protected media share.</p>
+                                    <code>/audiobooks</code>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-gold"><i data-lucide="volume-2"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>4. Indexing</span>
+                                    <h3>Audiobookshelf</h3>
+                                    <p>Indexes the organized library on daemon3.</p>
+                                </div>
+                            </article>
+                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
+                            <article class="lab-flow-step">
+                                <div class="lab-flow-icon bg-cyan"><i data-lucide="smartphone"></i></div>
+                                <div class="lab-flow-copy">
+                                    <span>5. Playback</span>
+                                    <h3>ABS App</h3>
+                                    <p>Mobile and web users stream books with synced progress tracking.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="lab-footnotes">
+                        <article class="lab-footnote">
+                            <h3>
+                                <i data-lucide="link-2"></i>
+                                Hardlink Integration
+                            </h3>
+                            <p>
+                                The lab uses hardlinks for media management so the downloader can continue seeding from
+                                ingress while Jellyfin serves the renamed library copy without duplicating disk usage.
+                            </p>
+                        </article>
+                        <article class="lab-footnote">
+                            <h3>
+                                <i data-lucide="shield-check"></i>
+                                VPN Tunneling
+                            </h3>
+                            <p>
+                                All media transmission runs through qBittorrent containers bound directly to a VPN
+                                network. If the tunnel drops, the killswitch prevents WAN IP exposure.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="lab-footer">
+            <div class="lab-footer-brand">
+                <img src="assets/thinker-logo.png" alt="StarlightDaemon logo">
+                <span>Starlight<span>Lab</span></span>
+            </div>
+            <p>&copy; <span id="labYear"></span> Starlight Homelab Reference v5.2 | Secure Internal Reference</p>
+            <div class="lab-footer-icons" aria-hidden="true">
+                <span><i data-lucide="shield-check"></i></span>
+                <span><i data-lucide="settings-2"></i></span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
+    <script src="js/homelab.js"></script>
+</body>
+
+</html>
