@@ -8,8 +8,8 @@
     <meta name="author" content="StarlightDaemon">
     <meta name="theme-color" content="#090f1c">
     <link rel="canonical" href="https://homelab.starlightdaemon.dev/">
-    <title>StarlightLab | Homelab Architecture</title>
-    <link rel="stylesheet" href="css/homelab.css?v=1.0.1">
+    <title>StarlightDaemon Homelab</title>
+    <link rel="stylesheet" href="css/homelab.css?v=1.0.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,14 +24,18 @@
                 <a href="https://www.starlightdaemon.dev/" class="lab-brand"
                     aria-label="Return to StarlightDaemon home page">
                     <img src="assets/thinker-logo.png" alt="StarlightDaemon logo" class="lab-brand-logo">
-                    <span class="lab-brand-wordmark">Starlight<span>Lab</span></span>
+                    <span class="lab-brand-wordmark">StarlightDaemon<span> Homelab</span></span>
                 </a>
 
                 <div class="lab-nav-links">
                     <a href="#unraid">Starlight NAS</a>
                     <a href="#proxmox">Starlight Cluster</a>
                     <a href="#pipeline">Workflows</a>
-                    <a href="https://www.starlightdaemon.dev/">Main Site</a>
+                    <a href="#stack-basics">Stack Basics</a>
+                </div>
+
+                <div class="lab-nav-meta">
+                    <span>Architecture Reference v5.2</span>
                 </div>
 
                 <button class="lab-menu-button" type="button" aria-expanded="false" aria-controls="mobileMenu"
@@ -44,16 +48,12 @@
                 <a href="#unraid">Starlight NAS</a>
                 <a href="#proxmox">Starlight Cluster</a>
                 <a href="#pipeline">Workflows</a>
-                <a href="https://www.starlightdaemon.dev/">Main Site</a>
+                <a href="#stack-basics">Stack Basics</a>
             </div>
         </nav>
 
         <header class="lab-hero">
-            <div class="lab-hero-badge">
-                <i data-lucide="activity"></i>
-                <span>Architecture Reference v5.2</span>
-            </div>
-            <h1>Starlight Homelab Architecture</h1>
+            <h1>StarlightDaemon Homelab</h1>
             <p>
                 Detailed hardware and software specification for the Starlight homelab ecosystem, converted into a
                 static operational reference page.
@@ -63,7 +63,7 @@
                 <article class="lab-stat-card">
                     <span class="lab-stat-label">Storage</span>
                     <strong>84 TB Raw</strong>
-                    <p>Parity-protected Unraid array with SSD cache.</p>
+                    <p>Unraid array with 26 TB parity protection and a 512 GB cache drive.</p>
                 </article>
                 <article class="lab-stat-card">
                     <span class="lab-stat-label">Compute</span>
@@ -71,9 +71,9 @@
                     <p>Mixed Intel hosts for media, services, and AI workloads.</p>
                 </article>
                 <article class="lab-stat-card">
-                    <span class="lab-stat-label">Ingress</span>
+                    <span class="lab-stat-label">Edge Access</span>
                     <strong>Cloudflare + NPM</strong>
-                    <p>Zero-trust tunnel, managed DNS, reverse proxy, and SSL.</p>
+                    <p>External access layer for tunnel routing, DNS, reverse proxy, and SSL termination.</p>
                 </article>
             </div>
         </header>
@@ -101,7 +101,11 @@
                         <div class="lab-spec-list">
                             <div class="lab-spec-item">
                                 <span>Motherboard</span>
-                                <strong>MSI B450 TOMAHAWK MAX</strong>
+                                <strong>MSI B450 TOMAHAWK MAX (MS-7C02)</strong>
+                            </div>
+                            <div class="lab-spec-item">
+                                <span>Firmware</span>
+                                <strong>AMI BIOS 3.M2 · 2025-09-12</strong>
                             </div>
                             <div class="lab-spec-item">
                                 <span>Processor</span>
@@ -111,9 +115,25 @@
                                 <span>Memory</span>
                                 <strong>64 GB DDR4</strong>
                             </div>
+                            <div class="lab-spec-item">
+                                <span>Network</span>
+                                <strong>Realtek RTL8111/8168/8211 Gigabit Ethernet</strong>
+                            </div>
+                            <div class="lab-spec-item">
+                                <span>GPU / Passthrough</span>
+                                <strong>NVIDIA GeForce GTX 1060 6 GB</strong>
+                            </div>
+                            <div class="lab-spec-item">
+                                <span>Cache Drive</span>
+                                <strong>Samsung MZVLB512HBJQ NVMe · 512 GB</strong>
+                            </div>
                             <div class="lab-spec-item lab-spec-item-highlight">
                                 <span>Storage Cluster</span>
-                                <strong>~84 TB Raw Capacity</strong>
+                                <strong>84 TB Raw Capacity</strong>
+                            </div>
+                            <div class="lab-spec-item">
+                                <span>CPU Pairings</span>
+                                <strong>6 thread pairs mapped across CPU 0-11</strong>
                             </div>
                         </div>
                     </article>
@@ -138,24 +158,59 @@
 
                                 <div class="lab-disk-list">
                                     <div class="lab-disk-row">
-                                        <strong>Parity (ST26000)</strong>
-                                        <span>26 TB</span>
+                                        <div class="lab-disk-main">
+                                            <strong>Parity (ST26000)</strong>
+                                            <span>26 TB parity disk</span>
+                                        </div>
                                         <em class="state-info">Healthy</em>
                                     </div>
                                     <div class="lab-disk-row">
-                                        <strong>Disk 1 (ST26000)</strong>
-                                        <span>26 TB</span>
+                                        <div class="lab-disk-main">
+                                            <strong>Disk 1 (ST26000)</strong>
+                                            <span>26 TB total</span>
+                                        </div>
                                         <em class="state-good">Healthy</em>
+                                        <div class="lab-disk-usage">
+                                            <div class="lab-disk-usage-head">
+                                                <span>Used 24.3 TB</span>
+                                                <span>Free 1.73 TB</span>
+                                            </div>
+                                            <div class="lab-disk-usage-bar">
+                                                <span style="width: 93.5%;"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="lab-disk-row">
-                                        <strong>Disk 2 (ST18000)</strong>
-                                        <span>18 TB</span>
+                                        <div class="lab-disk-main">
+                                            <strong>Disk 2 (ST18000)</strong>
+                                            <span>18 TB total</span>
+                                        </div>
                                         <em class="state-good">Healthy</em>
+                                        <div class="lab-disk-usage">
+                                            <div class="lab-disk-usage-head">
+                                                <span>Used 8.31 TB</span>
+                                                <span>Free 9.69 TB</span>
+                                            </div>
+                                            <div class="lab-disk-usage-bar">
+                                                <span style="width: 46.2%;"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="lab-disk-row">
-                                        <strong>Disk 3 (WD140)</strong>
-                                        <span>14 TB</span>
+                                        <div class="lab-disk-main">
+                                            <strong>Disk 3 (WD140)</strong>
+                                            <span>14 TB total</span>
+                                        </div>
                                         <em class="state-good">Healthy</em>
+                                        <div class="lab-disk-usage">
+                                            <div class="lab-disk-usage-head">
+                                                <span>Used 9.02 TB</span>
+                                                <span>Free 4.98 TB</span>
+                                            </div>
+                                            <div class="lab-disk-usage-bar">
+                                                <span style="width: 64.4%;"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -164,13 +219,39 @@
                                 <h4>Array Reliability</h4>
                                 <p>
                                     Starlight NAS uses single-drive parity protection. This architecture allows a
-                                    single disk failure without data loss, while scheduled parity checks protect
-                                    consistency across the array.
+                                    single 26 TB parity disk to protect the array against one drive failure while
+                                    scheduled parity checks help preserve consistency across the full 84 TB raw pool.
                                 </p>
+                                <div class="lab-device-summary">
+                                    <div class="lab-device-row">
+                                        <span>Total Raw Capacity</span>
+                                        <strong>84 TB across parity and data disks</strong>
+                                    </div>
+                                    <div class="lab-device-row">
+                                        <span>Parity Allocation</span>
+                                        <strong>26 TB reserved for single-drive parity</strong>
+                                    </div>
+                                    <div class="lab-device-row">
+                                        <span>Usable Array Capacity</span>
+                                        <strong>58 TB data capacity</strong>
+                                    </div>
+                                    <div class="lab-device-row">
+                                        <span>Array Used / Free</span>
+                                        <strong>41.6 TB used / 16.4 TB free</strong>
+                                    </div>
+                                    <div class="lab-device-row">
+                                        <span>Cache Pool</span>
+                                        <strong>512 GB cache drive · 206 GB used / 302 GB free</strong>
+                                    </div>
+                                    <div class="lab-device-row">
+                                        <span>Boot Flash</span>
+                                        <strong>1.69 GB used / 29.3 GB free</strong>
+                                    </div>
+                                </div>
                                 <ul class="lab-note-list">
                                     <li>
                                         <i data-lucide="zap"></i>
-                                        <span>SSD Cache (512GB) for appdata and ingress</span>
+                                        <span>512 GB SSD cache drive for appdata and ingress</span>
                                     </li>
                                     <li>
                                         <i data-lucide="database"></i>
@@ -255,24 +336,6 @@
                                 <p class="lab-service-role">User Onboarding</p>
                                 <p>Invitation and setup flow for users joining the Starlight ecosystem.</p>
                             </article>
-                            <article class="lab-service-item">
-                                <div class="lab-service-id">ID 222</div>
-                                <h4>homebox</h4>
-                                <p class="lab-service-role">Inventory Tracking</p>
-                                <p>Tracks serials, hardware placement, and warranty metadata across the lab.</p>
-                            </article>
-                            <article class="lab-service-item">
-                                <div class="lab-service-id">ID 229</div>
-                                <h4>myspeed</h4>
-                                <p class="lab-service-role">ISP Benchmarking</p>
-                                <p>Measures bandwidth and latency over time to identify service quality drift.</p>
-                            </article>
-                            <article class="lab-service-item">
-                                <div class="lab-service-id">ID 100</div>
-                                <h4>karakeep</h4>
-                                <p class="lab-service-role">Karaoke Media Host</p>
-                                <p>Dedicated management and streaming host for the karaoke media library.</p>
-                            </article>
                         </div>
                     </article>
 
@@ -329,6 +392,24 @@
                                 <p>High-fidelity library manager and player for audiobooks and podcasts with
                                     multi-user progress tracking.</p>
                             </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 222</div>
+                                <h4>homebox</h4>
+                                <p class="lab-service-role">Inventory Tracking</p>
+                                <p>Tracks serials, hardware placement, and warranty metadata across the lab.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 229</div>
+                                <h4>myspeed</h4>
+                                <p class="lab-service-role">ISP Benchmarking</p>
+                                <p>Measures bandwidth and latency over time to identify service quality drift.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID 100</div>
+                                <h4>karakeep</h4>
+                                <p class="lab-service-role">Karaoke Media Host</p>
+                                <p>Dedicated management and streaming host for the karaoke media library.</p>
+                            </article>
                         </div>
                     </article>
                 </div>
@@ -341,207 +422,202 @@
                     </div>
                     <div>
                         <p>Operations Flow</p>
-                        <h2>Media Workflow Workflows</h2>
+                        <h2>Media Workflows</h2>
                     </div>
-                </div>
-
-                <div class="lab-tab-row" role="tablist" aria-label="Media workflow tabs">
-                    <button class="lab-tab is-active" type="button" role="tab" id="tab-movies" aria-selected="true"
-                        aria-controls="panel-movies" data-tab-target="movies">
-                        <i data-lucide="play"></i>
-                        <span>Movie Pipeline</span>
-                    </button>
-                    <button class="lab-tab" type="button" role="tab" id="tab-shows" aria-selected="false"
-                        aria-controls="panel-shows" data-tab-target="shows">
-                        <i data-lucide="tv"></i>
-                        <span>TV Pipeline</span>
-                    </button>
-                    <button class="lab-tab" type="button" role="tab" id="tab-books" aria-selected="false"
-                        aria-controls="panel-books" data-tab-target="books">
-                        <i data-lucide="book-open"></i>
-                        <span>Audiobook Pipeline</span>
-                    </button>
                 </div>
 
                 <div class="lab-pipeline-card">
-                    <div class="lab-flow-panel is-active" id="panel-movies" role="tabpanel" aria-labelledby="tab-movies"
-                        data-tab-panel="movies">
-                        <div class="lab-flow-grid">
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-blue"><i data-lucide="search"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>1. Discovery</span>
-                                    <h3>Seerr</h3>
-                                    <p>User initiates request. Seerr handles approval logic and pushes to Radarr.</p>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-sky"><i data-lucide="settings-2"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>2. Intelligence</span>
-                                    <h3>Radarr (HD/UHD)</h3>
-                                    <p>Prowlarr searches indexers. Radarr selects high-quality releases.</p>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-indigo"><i data-lucide="download"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>3. Transmission</span>
-                                    <h3>qBit VPN Movies</h3>
-                                    <p>Files land in a temporary staging share through the VPN path.</p>
-                                    <code>/moviesingress</code>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-emerald"><i data-lucide="refresh-cw"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>4. Processing</span>
-                                    <h3>Radarr Move</h3>
-                                    <p>File is renamed, cleaned, and hardlinked into the main array.</p>
-                                    <code>/movies</code>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-violet"><i data-lucide="play"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>5. Delivery</span>
-                                    <h3>Jellyfin</h3>
-                                    <p>Server detects new media on Unraid and indexes for playback.</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="lab-flow-panel" id="panel-shows" role="tabpanel" aria-labelledby="tab-shows" hidden
-                        data-tab-panel="shows">
-                        <div class="lab-flow-grid">
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-indigo"><i data-lucide="search"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>1. Discovery</span>
-                                    <h3>Seerr</h3>
-                                    <p>Request is approved and sent to Sonarr for series management.</p>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-blue"><i data-lucide="tv"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>2. Logic</span>
-                                    <h3>Sonarr</h3>
-                                    <p>Monitors seasons and episodes while using Prowlarr for release discovery.</p>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-sky"><i data-lucide="download"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>3. Transmission</span>
-                                    <h3>qBit VPN Shows</h3>
-                                    <p>Downloads season packs and episodes into the TV staging folder.</p>
-                                    <code>/showsingress</code>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-emerald"><i data-lucide="refresh-cw"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>4. Processing</span>
-                                    <h3>Sonarr Move</h3>
-                                    <p>Organizes files into season folders and hardlinks them to the final library.</p>
-                                    <code>/shows</code>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-violet"><i data-lucide="play"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>5. Delivery</span>
-                                    <h3>Jellyfin</h3>
-                                    <p>Metadata is scraped and content is served to home and remote clients.</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="lab-flow-panel" id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden
-                        data-tab-panel="books">
-                        <div class="lab-flow-grid">
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-amber"><i data-lucide="download"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>1. Intake</span>
-                                    <h3>Manual / Automation</h3>
-                                    <p>Audiobook files land in the dedicated intake share.</p>
-                                    <code>/audiobooksingress</code>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-orange"><i data-lucide="settings-2"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>2. Intelligence</span>
-                                    <h3>Shelfmark</h3>
-                                    <p>Applies metadata cleanup and organizes the final directory structure.</p>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-emerald"><i data-lucide="database"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>3. Storage</span>
-                                    <h3>Unraid</h3>
-                                    <p>Organized books are stored in the parity-protected media share.</p>
-                                    <code>/audiobooks</code>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-gold"><i data-lucide="volume-2"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>4. Indexing</span>
-                                    <h3>Audiobookshelf</h3>
-                                    <p>Indexes the organized library on daemon3.</p>
-                                </div>
-                            </article>
-                            <div class="lab-flow-arrow"><i data-lucide="arrow-right"></i></div>
-                            <article class="lab-flow-step">
-                                <div class="lab-flow-icon bg-cyan"><i data-lucide="smartphone"></i></div>
-                                <div class="lab-flow-copy">
-                                    <span>5. Playback</span>
-                                    <h3>ABS App</h3>
-                                    <p>Mobile and web users stream books with synced progress tracking.</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="lab-footnotes">
-                        <article class="lab-footnote">
-                            <h3>
-                                <i data-lucide="link-2"></i>
-                                Hardlink Integration
-                            </h3>
-                            <p>
-                                The lab uses hardlinks for media management so the downloader can continue seeding from
-                                ingress while Jellyfin serves the renamed library copy without duplicating disk usage.
-                            </p>
+                    <div class="lab-system-tree">
+                        <article class="lab-system-node lab-system-node-entry">
+                            <span class="lab-system-eyebrow">Entry</span>
+                            <h3>Requests Enter The Media Stack</h3>
+                            <p>Seerr handles movie and TV requests. Shelfmark is both the request intake and manager layer for audiobooks before they join the main automation chain.</p>
+                            <div class="lab-system-chips">
+                                <span class="tool-pill tool-seerr" data-mark="SR">Seerr</span>
+                                <span class="tool-pill tool-shelfmark" data-mark="SH">Shelfmark</span>
+                            </div>
                         </article>
-                        <article class="lab-footnote">
-                            <h3>
-                                <i data-lucide="shield-check"></i>
-                                VPN Tunneling
-                            </h3>
-                            <p>
-                                All media transmission runs through qBittorrent containers bound directly to a VPN
-                                network. If the tunnel drops, the killswitch prevents WAN IP exposure.
-                            </p>
+
+                        <div class="lab-system-stage lab-system-stage-branch">
+                            <article class="lab-system-node">
+                                <span class="lab-system-eyebrow">Media Managers</span>
+                                <h3>Content Managers Split By Media Type</h3>
+                                <p>At this layer the stack diverges: Sonarr manages TV, Radarr manages movies, and Shelfmark handles both audiobook intake and library preparation.</p>
+                                <div class="lab-system-cluster">
+                                    <span class="tool-pill tool-sonarr">Sonarr</span>
+                                    <span class="tool-pill tool-radarr">Radarr</span>
+                                    <span class="tool-pill tool-shelfmark" data-mark="SH">Shelfmark</span>
+                                </div>
+                            </article>
+
+                            <article class="lab-system-side-node">
+                                <span class="lab-system-eyebrow">Indexer Access</span>
+                                <h4>Prowlarr</h4>
+                                <p>Prowlarr syncs indexers and search access for the automation stack.</p>
+                                <div class="lab-system-side-stack">
+                                    <div class="lab-system-side-leaf">
+                                        <span class="tool-pill tool-prowlarr" data-mark="PR">Prowlarr</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <article class="lab-system-node">
+                            <span class="lab-system-eyebrow">Downloaders</span>
+                            <h3>VPN-Bound qBittorrent Lanes</h3>
+                            <p>Approved releases move into dedicated qBittorrent containers so each media lane can stay isolated while routing through the VPN network.</p>
+                            <div class="lab-system-cluster lab-system-cluster-wide">
+                                <span class="tool-pill tool-qbittorrent">qBit VPN Movies</span>
+                                <span class="tool-pill tool-qbittorrent">qBit VPN Movies UHD</span>
+                                <span class="tool-pill tool-qbittorrent">qBit VPN Shows</span>
+                                <span class="tool-pill tool-qbittorrent">qBit VPN Audiobooks</span>
+                            </div>
+                        </article>
+
+                        <article class="lab-system-node">
+                            <span class="lab-system-eyebrow">Library</span>
+                            <h3>Hardlinked Into The Main Media Folders</h3>
+                            <p>Completed downloads are renamed and hardlinked into the final Unraid library structure so the source can keep seeding while the organized copy stays usable.</p>
+                            <div class="lab-system-chips">
+                                <span class="tool-pill tool-unraid" data-mark="UN">Unraid</span>
+                                <span>Hardlinks</span>
+                                <code>/movies</code>
+                                <code>/shows</code>
+                                <code>/audiobooks</code>
+                            </div>
+                        </article>
+
+                        <article class="lab-system-node">
+                            <span class="lab-system-eyebrow">Media Services</span>
+                            <h3>Libraries Become Browsable And Usable</h3>
+                            <p>Jellyfin serves movies and TV, Audiobookshelf indexes audiobooks, and RomM manages the gaming library so each collection stays organized and usable from the right interface.</p>
+                            <div class="lab-system-cluster lab-system-cluster-media">
+                                <span class="tool-pill tool-jellyfin">Jellyfin</span>
+                                <span class="tool-pill tool-audiobookshelf" data-mark="AB">Audiobookshelf</span>
+                                <span class="tool-pill tool-romm" data-mark="RM">RomM</span>
+                            </div>
+                        </article>
+
+                        <article class="lab-system-node lab-system-node-edge">
+                            <span class="lab-system-eyebrow">Remote Access</span>
+                            <h3>Cloudflare Makes The Stack Web Accessible</h3>
+                            <p>Cloudflared creates the tunnel and Nginx Proxy Manager handles service routing so the media apps can be reached remotely without exposing direct inbound ports.</p>
+                            <div class="lab-system-chips lab-system-chips-remote">
+                                <span class="tool-pill tool-cloudflared">Cloudflared</span>
+                                <span class="tool-pill tool-npm" data-mark="NP">Nginx Proxy Manager</span>
+                                <span class="tool-pill tool-cloudflare-tunnel">Cloudflare Tunnel</span>
+                            </div>
                         </article>
                     </div>
+
+                </div>
+            </section>
+
+            <section class="lab-section" id="stack-basics">
+                <div class="lab-section-title">
+                    <div class="lab-section-icon">
+                        <i data-lucide="info"></i>
+                    </div>
+                    <div>
+                        <p>Reference Notes</p>
+                        <h2>Platform Basics</h2>
+                    </div>
+                </div>
+
+                <div class="lab-basics-grid">
+                    <article class="lab-basic-card">
+                        <div class="lab-basic-head">
+                            <i data-lucide="cpu"></i>
+                            <h3>Proxmox VE</h3>
+                        </div>
+                        <p>
+                            Proxmox is the virtualization platform that runs the cluster. It hosts virtual machines and
+                            Linux containers so services can be split across nodes instead of living on one bare-metal
+                            system.
+                        </p>
+                    </article>
+
+                    <article class="lab-basic-card">
+                        <div class="lab-basic-head">
+                            <i data-lucide="box"></i>
+                            <h3>LXC</h3>
+                        </div>
+                        <p>
+                            LXC stands for Linux Containers. They are lighter than full virtual machines because they
+                            share the host kernel, which makes them useful for efficient service hosting with less
+                            overhead.
+                        </p>
+                    </article>
+
+                    <article class="lab-basic-card">
+                        <div class="lab-basic-head">
+                            <i data-lucide="hard-drive"></i>
+                            <h3>Unraid</h3>
+                        </div>
+                        <p>
+                            Unraid is the storage platform in this lab. It provides the parity-protected array, shared
+                            media storage, cache handling, and the durable filesystem path the rest of the stack
+                            depends on.
+                        </p>
+                    </article>
+
+                    <article class="lab-basic-card">
+                        <div class="lab-basic-head">
+                            <i data-lucide="package"></i>
+                            <h3>Docker</h3>
+                        </div>
+                        <p>
+                            Docker packages applications into isolated containers with their own dependencies and
+                            runtime settings. It simplifies service deployment, upgrades, and repeatable recovery
+                            across hosts.
+                        </p>
+                    </article>
+
+                    <article class="lab-basic-card">
+                        <div class="lab-basic-head">
+                            <i data-lucide="network"></i>
+                            <h3>Nginx Proxy Manager</h3>
+                        </div>
+                        <p>
+                            Nginx Proxy Manager is the reverse proxy layer. It receives inbound requests, routes them
+                            to the correct internal service, and manages certificates and hostname-based access rules.
+                        </p>
+                    </article>
+
+                    <article class="lab-basic-card">
+                        <div class="lab-basic-head">
+                            <i data-lucide="cloud"></i>
+                            <h3>Cloudflared</h3>
+                        </div>
+                        <p>
+                            Cloudflared creates an outbound tunnel from the homelab to Cloudflare. That allows remote
+                            access to internal services without exposing traditional inbound ports directly on the home
+                            network.
+                        </p>
+                    </article>
+                </div>
+
+                <div class="lab-footnotes">
+                    <article class="lab-footnote">
+                        <h3>
+                            <i data-lucide="link-2"></i>
+                            Hardlink Integration
+                        </h3>
+                        <p>
+                            The lab uses hardlinks for media management so the downloader can continue seeding from
+                            ingress while Jellyfin serves the renamed library copy without duplicating disk usage.
+                        </p>
+                    </article>
+                    <article class="lab-footnote">
+                        <h3>
+                            <i data-lucide="shield-check"></i>
+                            VPN Tunneling
+                        </h3>
+                        <p>
+                            All media downloading and seeding runs through qBittorrent containers bound directly
+                            to a VPN network. If the tunnel drops, the killswitch prevents WAN IP exposure.
+                        </p>
+                    </article>
                 </div>
             </section>
         </main>
@@ -549,7 +625,7 @@
         <footer class="lab-footer">
             <div class="lab-footer-brand">
                 <img src="assets/thinker-logo.png" alt="StarlightDaemon logo">
-                <span>Starlight<span>Lab</span></span>
+                <span>Starlight<span>Daemon</span></span>
             </div>
             <p>&copy; <span id="labYear"></span> Starlight Homelab Reference v5.2 | Secure Internal Reference</p>
             <div class="lab-footer-icons" aria-hidden="true">
