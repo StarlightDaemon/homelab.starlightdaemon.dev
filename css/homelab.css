@@ -851,18 +851,16 @@ button {
 }
 
 .lab-system-stage-branch {
-    display: grid;
-    grid-template-columns: 15.6rem 42rem 4.1rem 11.5rem;
-    align-items: stretch;
+    display: block;
+    position: relative;
     max-width: 73.2rem;
     margin-left: auto;
     margin-right: auto;
 }
 
 .lab-system-stage-branch .lab-system-node {
-    grid-column: 2;
     max-width: 42rem;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .lab-system-node,
@@ -916,12 +914,15 @@ button {
 }
 
 .lab-system-stage-branch .lab-system-side-node {
-    grid-column: 4;
-    position: relative;
-    width: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
-    padding: 1rem 1rem 0.95rem;
+    justify-content: center;
+    width: 11.5rem;
+    padding: 0.7rem 0.7rem 0.75rem;
     margin: 0;
 }
 
@@ -965,12 +966,22 @@ button {
     line-height: 1.55;
 }
 
+.lab-system-stage-branch .lab-system-side-node h4 {
+    font-size: 0.82rem;
+    margin-bottom: 0.4rem;
+}
+
+.lab-system-stage-branch .lab-system-side-node p {
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
 .lab-system-side-stack,
 .lab-system-side-branch {
     display: grid;
     gap: 0.45rem;
-    margin-top: auto;
-    padding-top: 0.8rem;
+    margin-top: 0.55rem;
+    padding-top: 0;
 }
 
 .lab-system-side-leaf {
@@ -1432,7 +1443,6 @@ button {
     }
 
     .lab-system-stage-branch {
-        display: block;
         max-width: none;
     }
 
@@ -1443,9 +1453,9 @@ button {
     }
 
     .lab-system-stage-branch .lab-system-side-node {
-        position: relative;
+        position: static;
         top: auto;
-        left: auto;
+        right: auto;
         width: auto;
         transform: none;
     }

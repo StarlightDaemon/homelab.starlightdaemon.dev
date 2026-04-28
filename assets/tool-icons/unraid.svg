@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
+  <defs>
+    <linearGradient id="unraid-grad" x1="14" y1="18" x2="58" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7A18"/>
+      <stop offset="1" stop-color="#FF3D00"/>
+    </linearGradient>
+  </defs>
+  <path d="M16 24C16 20.686 18.686 18 22 18H58L48 28H22C18.686 28 16 25.314 16 22V24Z" fill="url(#unraid-grad)"/>
+  <path d="M10 36C10 32.686 12.686 30 16 30H52L42 40H16C12.686 40 10 37.314 10 34V36Z" fill="url(#unraid-grad)"/>
+  <path d="M18 48C18 44.686 20.686 42 24 42H60L50 52H24C20.686 52 18 49.314 18 46V48Z" fill="url(#unraid-grad)"/>
+</svg>
