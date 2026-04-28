@@ -853,7 +853,7 @@ button {
 .lab-system-stage-branch {
     display: block;
     position: relative;
-    max-width: 73.2rem;
+    max-width: 75.7rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -913,15 +913,21 @@ button {
     margin: 0;
 }
 
-.lab-system-stage-branch .lab-system-side-node {
+.lab-system-side-column {
     position: absolute;
     right: 0;
     top: 0;
-    bottom: 0;
+    width: 14rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lab-system-stage-branch .lab-system-side-node {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 11.5rem;
     padding: 0.7rem 0.7rem 0.75rem;
     margin: 0;
 }
@@ -929,11 +935,30 @@ button {
 .lab-system-side-node::before {
     content: '';
     position: absolute;
-    left: -4.1rem;
+    left: -2.85rem;
     top: 50%;
-    width: 4.1rem;
+    width: 2.85rem;
     border-top: 2px solid var(--lab-border-strong);
     transform: translateY(-50%);
+}
+
+.lab-system-stage-branch .lab-system-side-node-child::before {
+    left: 50%;
+    top: -1rem;
+    width: 0;
+    height: 1rem;
+    border-left: 2px solid var(--lab-border-strong);
+    border-top: none;
+    transform: none;
+}
+
+.lab-system-side-column .lab-system-side-leaf {
+    padding: 0.3rem;
+}
+
+.lab-system-side-column .lab-system-side-leaf .tool-pill {
+    min-height: 34px;
+    padding: 0.4rem 0.7rem 0.4rem 0.5rem;
 }
 
 .lab-system-eyebrow {
@@ -1450,6 +1475,12 @@ button {
     .lab-system-side-node {
         max-width: none;
         margin-bottom: 1rem;
+    }
+
+    .lab-system-side-column {
+        position: static;
+        transform: none;
+        width: auto;
     }
 
     .lab-system-stage-branch .lab-system-side-node {
