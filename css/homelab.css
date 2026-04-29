@@ -21,8 +21,8 @@
     --lab-shadow-soft: none;
     --lab-radius: 2px;
     --lab-max-width: 1320px;
-    --lab-font-body: 'IBM Plex Sans', sans-serif;
-    --lab-font-mono: 'IBM Plex Mono', monospace;
+    --lab-font-body: Verdana, Geneva, Tahoma, sans-serif;
+    --lab-font-mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
 *,
