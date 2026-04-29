@@ -25,9 +25,7 @@ This repo is intended to remain portable and independently deployable. The site 
 ## Runtime Boundary
 
 - Local runtime assets should load from this repository only.
-- Intentional outbound runtime URLs are currently limited to:
-  - the canonical site URL `https://homelab.starlightdaemon.dev/`
-  - the main-site backlink `https://www.starlightdaemon.dev/`
+- Intentional outbound runtime URLs are currently limited to the canonical site URL `https://homelab.starlightdaemon.dev/`.
 - New third-party runtime scripts or styles should be treated as portability regressions.
 
 ## Local Preview

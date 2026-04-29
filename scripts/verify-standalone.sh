@@ -35,7 +35,7 @@ mapfile -t outbound_urls < <(rg -o --no-filename "https?://[^\"' )]+" index.html
 unexpected_urls=()
 for url in "${outbound_urls[@]}"; do
   case "$url" in
-    http://www.w3.org/2000/svg|https://homelab.starlightdaemon.dev/|https://www.starlightdaemon.dev/)
+    http://www.w3.org/2000/svg|https://homelab.starlightdaemon.dev/)
       ;;
     *)
       unexpected_urls+=("$url")

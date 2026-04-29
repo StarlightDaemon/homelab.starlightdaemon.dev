@@ -6,7 +6,7 @@ Use this as the opening prompt for the next agent working on the homelab separat
 
 You are working in `/mnt/e/homelab.starlightdaemon.dev`, which is the standalone Git repo for the `homelab.starlightdaemon.dev` site.
 
-Your job is to continue preparing this homelab repo for a clean move into its own workspace so it can be cloned, verified, and redeployed quickly without depending on the parent repo layout.
+Your job is to continue hardening this standalone homelab repo so it can be cloned, verified, and redeployed quickly without depending on the parent repo layout.
 
 Start by reading:
 
@@ -33,20 +33,18 @@ Constraints:
 - Treat this repo as the source of truth for the homelab site.
 - Do not introduce dependencies on `/mnt/e/StarlightDaemonDev`.
 - Keep local asset references relative.
-- Assume this repo may have been extracted from the parent workspace already.
+- This repo is already extracted from the parent workspace.
 - If you also touch the old parent workspace, do not revert unrelated changes there.
 
 Primary next-step goals:
 
 - Audit whether any remaining outbound references should be removed for stronger isolation.
-- Decide whether the backlink to `https://www.starlightdaemon.dev/` should remain.
-- Decide whether Google Fonts should be self-hosted.
-- If useful, add lightweight CI or documentation that preserves the repo separation contract.
+- If useful, tighten the existing verification script, CI, or documentation that preserves the repo separation contract.
 
 When you report back, focus on:
 
-- What still prevents a fully clean extraction
-- What can be moved as-is today
+- What still prevents a fully clean separation
+- What is already portable as-is today
 - The smallest next change that improves portability or deployment speed
 
 ## Short Version

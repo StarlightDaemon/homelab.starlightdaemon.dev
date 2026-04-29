@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository is being prepared for a clean move into its own workspace while staying quick to recover and redeploy.
+This repository has been moved into its own workspace and is being kept quick to recover and redeploy.
 
 The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future agent can clone it, verify it, and get it serving again with minimal rediscovery.
 
@@ -15,7 +15,7 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 
 ## What Was Done
 
-- Confirmed the homelab site is already a nested standalone Git repo with its own `.git`.
+- Confirmed the homelab site is a standalone Git repo with its own `.git`.
 - Verified runtime site files live inside this repo:
   - `index.html`
   - `css/homelab.css`
@@ -31,7 +31,7 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 
 ## Why These Changes Matter
 
-- The homelab repo needs to move cleanly without depending on the parent workspace layout.
+- The homelab repo needed to move cleanly without depending on the parent workspace layout.
 - Future work should start from clear rules instead of re-auditing every asset path.
 - The verification script gives a fast sanity check before or after migration.
 
@@ -45,9 +45,7 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 
 ## Known Intentional External Dependencies
 
-- The brand link in `index.html` points back to `https://www.starlightdaemon.dev/`.
-
-This is not a portability blocker for the repo move, but it means the site still links back to the public main site by design.
+There are no intentional outbound runtime dependencies beyond the canonical site URL.
 
 ## Recommended Start For Next Agent
 
@@ -59,11 +57,8 @@ This is not a portability blocker for the repo move, but it means the site still
 
 ## Good Next Steps
 
-- Extract this nested repo into its own top-level workspace when ready.
-- Decide whether to remove or keep the backlink to the main site.
-- Decide whether to self-host fonts for stronger isolation.
-- Optionally add CI that runs `scripts/verify-standalone.sh`.
+- Tighten the existing verification script or CI workflow if the repo boundary rules change.
 
 ## Caution
 
-- The homelab repo may be extracted into its own workspace already. Treat this repo as the source of truth and touch the parent workspace only when a parent-site change is intentional.
+- Treat this repo as the source of truth and touch the parent workspace only when a parent-site change is intentional.
