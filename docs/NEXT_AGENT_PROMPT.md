@@ -34,6 +34,8 @@ Constraints:
 - Do not introduce dependencies on `/mnt/e/StarlightDaemonDev`.
 - Keep local asset references relative.
 - This repo is already extracted from the parent workspace.
+- The live site runtime is operator-locked. Do not edit `index.html`, `css/homelab.css`, `js/homelab.js`, or anything under `assets/` unless the operator explicitly approves it.
+- Use `network-map/` for separate topology, diagram, and draft work until integration is explicitly requested.
 - If you also touch the old parent workspace, do not revert unrelated changes there.
 
 Primary next-step goals:

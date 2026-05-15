@@ -58,7 +58,10 @@ There are no intentional outbound runtime dependencies beyond the canonical site
 ## Good Next Steps
 
 - Tighten the existing verification script or CI workflow if the repo boundary rules change.
+- Build new network-map work inside `network-map/` unless the operator explicitly asks for live-site integration.
 
 ## Caution
 
 - Treat this repo as the source of truth and touch the parent workspace only when a parent-site change is intentional.
+- The live site runtime is operator-locked. Do not edit `index.html`, `css/homelab.css`, `js/homelab.js`, or anything under `assets/` unless the operator explicitly says to.
+- Read `docs/OPERATOR_LOCK.md` before starting work that might affect the live site.

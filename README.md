@@ -10,6 +10,7 @@ This repo is intended to remain portable and independently deployable. The site 
 - `css/homelab.css` - page styling
 - `js/homelab.js` - mobile nav and workflow tabs
 - `assets/` - logo and tool icons used by the site
+- `network-map/` - separate workspace for network topology drafts and source data
 - `scripts/verify-standalone.sh` - portability check for local assets and repo metadata
 - `docs/MIGRATION.md` - quick move / rebuild checklist
 - `CNAME` - GitHub Pages custom domain
@@ -21,6 +22,13 @@ This repo is intended to remain portable and independently deployable. The site 
 - Use relative paths for local CSS, JS, and image assets.
 - Do not introduce references to the parent workspace path.
 - Treat this repository as the source of truth for `homelab.starlightdaemon.dev`.
+
+## Operator Lock
+
+- The live site runtime is operator-locked.
+- Do not modify `index.html`, `css/homelab.css`, `js/homelab.js`, or anything under `assets/` unless the operator explicitly approves it.
+- Draft or exploratory work, including a more accurate network map, should stay outside the live site runtime until integration is explicitly requested.
+- Use `network-map/` as the default workspace for that separate work.
 
 ## Runtime Boundary
 
