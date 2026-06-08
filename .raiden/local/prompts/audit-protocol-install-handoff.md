@@ -1,4 +1,4 @@
-You are the homelab Instance agent, operating inside /mnt/e/homelab.starlightdaemon.dev.
+You are the homelab Instance agent, operating inside <workspace>/homelab.starlightdaemon.dev.
 
 Read first:
 - AGENTS.md
@@ -30,10 +30,10 @@ Already true (RAIDEN central wrote these on 2026-05-15):
 Still open:
 1. Run `git status --porcelain` — confirm only migration files appear. Stop if unexpected.
 2. Run `grep installed_edict_version .raiden/instance/metadata.json` → expect "0.4.0"
-3. Run from /mnt/e/Raiden/toolkit/updater/:
+3. Run from <workspace>/Raiden/toolkit/updater/:
      python3 -m raiden_updater.cli plan \
-       --instance /mnt/e/homelab.starlightdaemon.dev \
-       --package /mnt/e/Raiden/toolkit/updater/fixtures/sample_package
+       --instance <workspace>/homelab.starlightdaemon.dev \
+       --package <workspace>/Raiden/toolkit/updater/fixtures/sample_package
    → expect: Block reason: Already up to date — no changes needed
 4. Commit the following files:
      .raiden/writ/WORKSPACE_AUDIT_PROTOCOL.md

@@ -23,14 +23,17 @@ for path in "${required_files[@]}"; do
 done
 
 echo "Checking runtime files for parent-workspace references..."
-if rg -n "/mnt/e/StarlightDaemonDev|file://|href=[\"']/|src=[\"']/|url\(/" index.html css js >/tmp/homelab-verify-rg.txt 2>/dev/null; then
+if rg -n "<workspace>/StarlightDaemonDev|file://|href=[\"']/|src=[\"']/|url\(/" index.html css js >/tmp/homelab-verify-rg.txt 2>/dev/null; then
   cat /tmp/homelab-verify-rg.txt >&2
   echo "Found workspace-specific references." >&2
   exit 1
 fi
 
 echo "Checking runtime files for unexpected outbound URLs..."
-mapfile -t outbound_urls < <(rg -o --no-filename "https?://[^\"' )]+" index.html css js | sort -u)
+outbound_urls=()
+while IFS= read -r line; do
+  outbound_urls+=("$line")
+done < <(rg -o --no-filename "https?://[^\"' )]+" index.html css js | sort -u)
 
 unexpected_urls=()
 for url in "${outbound_urls[@]}"; do

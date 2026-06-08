@@ -4,7 +4,7 @@ Use this as the opening prompt for the next agent working on the homelab separat
 
 ## Recommended Prompt
 
-You are working in `/mnt/e/homelab.starlightdaemon.dev`, which is the standalone Git repo for the `homelab.starlightdaemon.dev` site.
+You are working in `<workspace>/homelab.starlightdaemon.dev`, which is the standalone Git repo for the `homelab.starlightdaemon.dev` site.
 
 Your job is to continue hardening this standalone homelab repo so it can be cloned, verified, and redeployed quickly without depending on the parent repo layout.
 
@@ -16,7 +16,7 @@ Start by reading:
 
 Then do this immediately:
 
-1. Run `git status` inside `/mnt/e/homelab.starlightdaemon.dev`
+1. Run `git status` inside `<workspace>/homelab.starlightdaemon.dev`
 2. Run `bash scripts/verify-standalone.sh`
 3. If needed, start a preview server with `python3 -m http.server 8123`
 
@@ -26,12 +26,12 @@ Current known state:
 - Runtime files are inside this repo: `index.html`, `css/`, `js/`, `assets/`, `CNAME`, `.nojekyll`.
 - The verification script currently passes.
 - The parent repo homepage card already links to `https://homelab.starlightdaemon.dev`.
-- The old parent repo redirect file `/mnt/e/StarlightDaemonDev/homelab.html` was updated to point to the custom domain instead of the old `homelab/` path.
+- The old parent repo redirect file `<workspace>/StarlightDaemonDev/homelab.html` was updated to point to the custom domain instead of the old `homelab/` path.
 
 Constraints:
 
 - Treat this repo as the source of truth for the homelab site.
-- Do not introduce dependencies on `/mnt/e/StarlightDaemonDev`.
+- Do not introduce dependencies on `<workspace>/StarlightDaemonDev`.
 - Keep local asset references relative.
 - This repo is already extracted from the parent workspace.
 - The live site runtime is operator-locked. Do not edit `index.html`, `css/homelab.css`, `js/homelab.js`, or anything under `assets/` unless the operator explicitly approves it.
@@ -51,4 +51,4 @@ When you report back, focus on:
 
 ## Short Version
 
-Continue hardening the standalone `homelab.starlightdaemon.dev` repo in `/mnt/e/homelab.starlightdaemon.dev`. Read the startup docs, run `git status`, run `bash scripts/verify-standalone.sh`, preview if needed, then improve portability without introducing new parent-repo dependencies.
+Continue hardening the standalone `homelab.starlightdaemon.dev` repo in `<workspace>/homelab.starlightdaemon.dev`. Read the startup docs, run `git status`, run `bash scripts/verify-standalone.sh`, preview if needed, then improve portability without introducing new parent-repo dependencies.

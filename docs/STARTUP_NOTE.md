@@ -8,10 +8,10 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 
 ## Where Things Live
 
-- Standalone homelab repo: `/mnt/e/homelab.starlightdaemon.dev`
-- Main site repo: `/mnt/e/StarlightDaemonDev`
-- Parent-site homepage card link: `/mnt/e/StarlightDaemonDev/index.html`
-- Legacy redirect entrypoint: `/mnt/e/StarlightDaemonDev/homelab.html`
+- Standalone homelab repo: `<workspace>/homelab.starlightdaemon.dev`
+- Main site repo: `<workspace>/StarlightDaemonDev`
+- Parent-site homepage card link: `<workspace>/StarlightDaemonDev/index.html`
+- Legacy redirect entrypoint: `<workspace>/StarlightDaemonDev/homelab.html`
 
 ## What Was Done
 
@@ -38,7 +38,7 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 ## Current State
 
 - `bash scripts/verify-standalone.sh` passes.
-- Runtime files do not reference `/mnt/e/StarlightDaemonDev`.
+- Runtime files do not reference `<workspace>/StarlightDaemonDev`.
 - Lucide icons are rendered locally from `js/homelab.js`; there is no third-party icon script dependency.
 - The main homepage card already points to `https://homelab.starlightdaemon.dev`.
 - The old redirect page now points to the custom domain.
@@ -49,7 +49,7 @@ There are no intentional outbound runtime dependencies beyond the canonical site
 
 ## Recommended Start For Next Agent
 
-1. `cd /mnt/e/homelab.starlightdaemon.dev`
+1. `cd <workspace>/homelab.starlightdaemon.dev`
 2. `git status`
 3. `bash scripts/verify-standalone.sh`
 4. `python3 -m http.server 8123`

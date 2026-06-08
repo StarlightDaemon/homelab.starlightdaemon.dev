@@ -1,6 +1,6 @@
 # Current State
 
-**Last updated:** 2026-05-15
+**Last updated:** 2026-06-07
 **Branch:** main
 **Deployment:** Live at https://homelab.starlightdaemon.dev/ via GitHub Pages
 
@@ -21,11 +21,12 @@ homelab.starlightdaemon.dev is a standalone static site documenting the Starligh
 - CI: standalone verification workflow (`.github/workflows/verify-standalone.yml`) runs `scripts/verify-standalone.sh` on push/PR.
 - `network-map/` workspace is active for network topology drafts — separate from the live site.
 - `docs/MIGRATION.md` provides a quick-move/rebuild checklist if the repo needs to relocate.
-- RAIDEN Instance installed at Edict v0.4.0.
+- RAIDEN Instance installed at Edict v0.6.1.
 
 ## In Progress
 
 - Network map drafts in `network-map/` (staging; not yet integrated into live site).
+- macOS migration remediation — addressing stale WSL/Linux paths identified in the 2026-06-07 migration audit (22 stale `/mnt/e/` path occurrences across 6 files).
 
 ## Not Yet Done
 

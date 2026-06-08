@@ -8,7 +8,7 @@ The repo is expected to stay self-contained:
 
 - All site files live inside this repository.
 - Local assets are referenced relative to the repo.
-- No runtime dependency should exist on `/mnt/e/StarlightDaemonDev` or the parent site repo.
+- No runtime dependency should exist on `<workspace>/StarlightDaemonDev` or the parent site repo.
 - GitHub Pages deployment is driven by `CNAME` and the repository contents only.
 
 ## Fast Reboot Steps

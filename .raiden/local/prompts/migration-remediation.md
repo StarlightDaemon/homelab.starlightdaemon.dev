@@ -70,8 +70,8 @@ Still open:
    stashed changes).
 5. Signal to the operator: homelab.starlightdaemon.dev is ready for the RAIDEN central
    agent to run the v0.4.0 migration prompt from
-   /mnt/e/Raiden/toolkit/prompts/audit-protocol-migration-v0.4.0-prompt.md
-   targeting --instance /mnt/e/homelab.starlightdaemon.dev. (v0.3.0 skipped; v0.4.0 direct.)
+   <workspace>/Raiden/toolkit/prompts/audit-protocol-migration-v0.4.0-prompt.md
+   targeting --instance <workspace>/homelab.starlightdaemon.dev. (v0.3.0 skipped; v0.4.0 direct.)
 
 Do not:
 - reopen settled naming or architecture
