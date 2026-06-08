@@ -26,7 +26,6 @@ homelab.starlightdaemon.dev is a standalone static site documenting the Starligh
 ## In Progress
 
 - Network map drafts in `network-map/` (staging; not yet integrated into live site).
-- macOS migration remediation — addressing stale WSL/Linux paths identified in the 2026-06-07 migration audit (22 stale `/mnt/e/` path occurrences across 6 files).
 
 ## Not Yet Done
 
