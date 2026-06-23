@@ -5,6 +5,8 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+command -v rg > /dev/null 2>&1 || { echo "error: rg (ripgrep) required"; exit 1; }
+
 required_files=(
   "index.html"
   "CNAME"

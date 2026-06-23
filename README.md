@@ -46,6 +46,8 @@ Open `http://127.0.0.1:8123/`.
 
 ## Standalone Verification
 
+**Prerequisites:** `bash`, `rg` (ripgrep).
+
 ```bash
 bash scripts/verify-standalone.sh
 ```
