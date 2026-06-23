@@ -1,28 +1,39 @@
 :root {
     --lab-bg: #262626;
-    --lab-bg-soft: #393939;
     --lab-layer-01: #393939;
     --lab-layer-02: #525252;
     --lab-layer-03: #6f6f6f;
     --lab-bg-panel: rgba(57, 57, 57, 0.96);
-    --lab-bg-card: #525252;
     --lab-text: #f4f4f4;
     --lab-text-muted: #c6c6c6;
-    --lab-text-subtle: #a8a8a8;
-    --lab-text-dark: #161616;
-    --lab-line: #525252;
+    --lab-text-subtle: #c6c6c6;
     --lab-border-subtle: #525252;
     --lab-border-strong: #8d8d8d;
     --lab-blue: #0f62fe;
     --lab-blue-deep: #0353e9;
     --lab-support: #24a148;
     --lab-warning: #f1c21b;
-    --lab-shadow: none;
     --lab-shadow-soft: none;
     --lab-radius: 2px;
     --lab-max-width: 1320px;
     --lab-font-body: Verdana, Geneva, Tahoma, sans-serif;
     --lab-font-mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 0.5rem 1rem;
+    background: var(--lab-blue);
+    color: #ffffff;
+    text-decoration: none;
+    z-index: 9999;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+.skip-link:focus {
+    top: 0;
 }
 
 *,
@@ -84,6 +95,7 @@ button {
     top: 0;
     z-index: 30;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     background: rgba(38, 38, 38, 0.94);
     border-bottom: 1px solid var(--lab-border-subtle);
 }
@@ -242,44 +254,6 @@ button {
     color: var(--lab-text-muted);
     font-size: clamp(1.05rem, 2vw, 1.35rem);
     line-height: 1.65;
-}
-
-.lab-hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.lab-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 52px;
-    padding: 0.85rem 1.25rem;
-    border-radius: var(--lab-radius);
-    font-family: var(--lab-font-mono);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-
-.lab-button:hover,
-.lab-button:focus-visible {
-    transform: translateY(-2px);
-}
-
-.lab-button-primary {
-    color: #ffffff;
-    background: var(--lab-blue);
-    box-shadow: none;
-}
-
-.lab-button-secondary {
-    border: 1px solid var(--lab-border-subtle);
-    background: var(--lab-layer-01);
 }
 
 .lab-stat-row {
@@ -547,11 +521,11 @@ button {
 }
 
 .state-info {
-    color: var(--lab-blue);
+    color: #78a9ff;
 }
 
 .state-good {
-    color: var(--lab-support);
+    color: #42be65;
 }
 
 .lab-disk-usage {
@@ -780,47 +754,9 @@ button {
     line-height: 1.65;
 }
 
-.lab-tab-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-    margin-bottom: 1.4rem;
-}
-
-.lab-tab {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    min-height: 48px;
-    padding: 0.8rem 1.05rem;
-    border: 1px solid var(--lab-border-subtle);
-    border-radius: var(--lab-radius);
-    background: var(--lab-layer-01);
-    color: var(--lab-text);
-    cursor: pointer;
-    font-family: var(--lab-font-mono);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-    transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
-}
-
-.lab-tab:hover,
-.lab-tab:focus-visible,
-.lab-tab.is-active {
-    transform: translateY(-2px);
-    border-color: var(--lab-blue);
-    background: rgba(15, 98, 254, 0.14);
-}
-
 .lab-pipeline-card {
     padding: 1.5rem;
     background: var(--lab-layer-01);
-}
-
-.lab-flow-panel {
-    position: relative;
 }
 
 .lab-system-tree {
@@ -1001,8 +937,7 @@ button {
     line-height: 1.5;
 }
 
-.lab-system-side-stack,
-.lab-system-side-branch {
+.lab-system-side-stack {
     display: grid;
     gap: 0.45rem;
     margin-top: 0.55rem;
@@ -1178,10 +1113,6 @@ button {
     background-size: 90%;
 }
 
-.tool-hardlinks::before {
-    background: #24a148;
-}
-
 .tool-audiobookshelf::before {
     background-image: url("../assets/tool-icons/audiobookshelf.svg");
     background-size: 86%;
@@ -1205,43 +1136,6 @@ button {
 .lab-system-chips code {
     color: #78a9ff;
     background: var(--lab-bg);
-}
-
-
-.bg-blue {
-    background: var(--lab-blue);
-}
-
-.bg-sky {
-    background: var(--lab-blue-deep);
-}
-
-.bg-indigo {
-    background: #4589ff;
-}
-
-.bg-emerald {
-    background: var(--lab-support);
-}
-
-.bg-violet {
-    background: #a56eff;
-}
-
-.bg-amber {
-    background: var(--lab-warning);
-}
-
-.bg-orange {
-    background: #ff832b;
-}
-
-.bg-gold {
-    background: #d2a106;
-}
-
-.bg-cyan {
-    background: #33b1ff;
 }
 
 .lab-footnotes {
@@ -1418,16 +1312,6 @@ button {
     .lab-main,
     .lab-footer {
         width: min(calc(100% - 1.25rem), var(--lab-max-width));
-    }
-
-    .lab-hero-actions,
-    .lab-tab-row {
-        flex-direction: column;
-    }
-
-    .lab-button,
-    .lab-tab {
-        width: 100%;
     }
 
     .lab-panel-head,

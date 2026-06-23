@@ -7,18 +7,28 @@
     <meta name="description" content="Detailed hardware and software specification for the Starlight homelab.">
     <meta name="author" content="StarlightDaemon">
     <meta name="theme-color" content="#090f1c">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://homelab.starlightdaemon.dev/">
+    <meta property="og:title" content="StarlightDaemon Homelab">
+    <meta property="og:description" content="Detailed hardware and software specification for the Starlight homelab.">
+    <meta property="og:site_name" content="StarlightDaemon Homelab">
     <link rel="canonical" href="https://homelab.starlightdaemon.dev/">
     <title>StarlightDaemon Homelab</title>
     <link rel="stylesheet" href="css/homelab.css?v=1.0.4">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline';
+          img-src 'self'; font-src 'self'; base-uri 'none';
+          form-action 'none'; frame-ancestors 'none'">
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="lab-shell">
         <nav class="lab-nav" aria-label="Primary">
             <div class="lab-nav-inner">
                 <a href="index.html" class="lab-brand"
                     aria-label="Return to the top of the homelab home page">
-                    <img src="assets/thinker-logo.png" alt="StarlightDaemon logo" class="lab-brand-logo">
+                    <img src="assets/thinker-logo.png" alt="StarlightDaemon logo" class="lab-brand-logo" width="460" height="460">
                     <span class="lab-brand-wordmark">StarlightDaemon<span> Homelab</span></span>
                 </a>
 
@@ -73,7 +83,7 @@
             </div>
         </header>
 
-        <main class="lab-main">
+        <main class="lab-main" id="main-content">
             <section class="lab-section" id="unraid">
                 <div class="lab-section-title">
                     <div class="lab-section-icon">
@@ -97,10 +107,6 @@
                             <div class="lab-spec-item">
                                 <span>Motherboard</span>
                                 <strong>MSI B450 TOMAHAWK MAX (MS-7C02)</strong>
-                            </div>
-                            <div class="lab-spec-item">
-                                <span>Firmware</span>
-                                <strong>AMI BIOS 3.M2 · 2025-09-12</strong>
                             </div>
                             <div class="lab-spec-item">
                                 <span>Processor</span>
@@ -402,8 +408,14 @@
                             <article class="lab-service-item">
                                 <div class="lab-service-id">ID 100</div>
                                 <h4>karakeep</h4>
-                                <p class="lab-service-role">Karaoke Media Host</p>
-                                <p>Dedicated management and streaming host for the karaoke media library.</p>
+                                <p class="lab-service-role">Bookmark &amp; Link Archive</p>
+                                <p>Read-it-later and bookmark manager for saving, tagging, and organizing web links and articles.</p>
+                            </article>
+                            <article class="lab-service-item">
+                                <div class="lab-service-id">ID unknown</div>
+                                <h4>Shelfmark</h4>
+                                <p class="lab-service-role">Audiobook Intake Manager</p>
+                                <p>Audiobook intake and library management (see pipeline section).</p>
                             </article>
                         </div>
                     </article>
@@ -631,7 +643,7 @@
 
         <footer class="lab-footer">
             <div class="lab-footer-brand">
-                <img src="assets/thinker-logo.png" alt="StarlightDaemon logo">
+                <img src="assets/thinker-logo.png" alt="StarlightDaemon logo" width="460" height="460">
                 <span>Starlight<span>Daemon</span></span>
             </div>
             <p>&copy; <span id="labYear"></span> Starlight Homelab Reference v5.2 | Secure Internal Reference</p>

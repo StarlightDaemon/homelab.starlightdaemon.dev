@@ -23,7 +23,7 @@ for path in "${required_files[@]}"; do
 done
 
 echo "Checking runtime files for parent-workspace references..."
-if rg -n "<workspace>/StarlightDaemonDev|file://|href=[\"']/|src=[\"']/|url\(/" index.html css js >/tmp/homelab-verify-rg.txt 2>/dev/null; then
+if rg -n "/Users/|file://|href=[\"']/|src=[\"']/|url\(/" index.html css js >/tmp/homelab-verify-rg.txt 2>/dev/null; then
   cat /tmp/homelab-verify-rg.txt >&2
   echo "Found workspace-specific references." >&2
   exit 1
