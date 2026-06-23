@@ -1,6 +1,7 @@
 # Current State
 
 **Last updated:** 2026-06-22
+**Site version:** v1.0.0
 **Branch:** main
 **Deployment:** Live at https://homelab.starlightdaemon.dev/ via GitHub Pages
 
