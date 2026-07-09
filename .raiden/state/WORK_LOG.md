@@ -31,6 +31,13 @@
 
 - Security hardening, accessibility improvements, portability fixes, and dead-code removal across site runtime files.
 
+## 2026-07-09 — Edict v2.0.0 + state normalization
+
+- Applied Edict v2.0.0: added managed `ROUTING_POLICY.md`, removed managed `MODEL_TIERS.md` (`managed_file_removal`, expected); hook unchanged.
+- Stamped `state_schema_version: 2` into `.raiden/instance/metadata.json`.
+- Replaced local overlay `MODEL_MAP.md` with `ROUTING.md` (routing ladder, R1-R4 plus offload pool).
+- Normalized state files per the Fact-Home Rule: removed hand-written "Last updated" footer and the restated Edict-version claim from `CURRENT_STATE.md`; converted its loop-status restatement to a bare `OL-001` citation.
+
 ## Pre-RAIDEN notable events
 
 - Repo decoupled from starlightdaemon.dev submodule; standalone deployment established.
