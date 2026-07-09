@@ -33,8 +33,8 @@
 
 ## 2026-07-09 — Live-exposure scrub: absolute machine paths in tracked docs
 
-- Audit found tracked files under `.raiden/local/` (README.md and two prompts) contained absolute machine paths (`<workspace>/...`), live-served by this repo's Pages deployment (`.nojekyll`, root-served). Replaced with a generic `<workspace>/...` placeholder.
-- Verified `git grep -n '<workspace>'` and a PII sweep (`[redacted]`, `[redacted-domain]`, `[redacted-name]`) both return zero hits repo-wide post-fix.
+- Audit found tracked files under `.raiden/local/` (README.md and two prompts) contained an operator's absolute machine paths, live-served by this repo's Pages deployment (`.nojekyll`, root-served). Replaced with a generic `<workspace>/...` placeholder.
+- Verified a repo-wide machine-path grep and a separate personal-identifier grep both return zero hits post-fix.
 - Content scrub only; Pages/structural exposure itself is a separate follow-up.
 
 ## 2026-07-09 — Edict v2.0.0 + state normalization
