@@ -31,6 +31,12 @@
 
 - Security hardening, accessibility improvements, portability fixes, and dead-code removal across site runtime files.
 
+## 2026-07-09 — Live-exposure scrub: absolute machine paths in tracked docs
+
+- Audit found tracked files under `.raiden/local/` (README.md and two prompts) contained absolute machine paths (`<workspace>/...`), live-served by this repo's Pages deployment (`.nojekyll`, root-served). Replaced with a generic `<workspace>/...` placeholder.
+- Verified `git grep -n '<workspace>'` and a PII sweep (`[redacted]`, `[redacted-domain]`, `[redacted-name]`) both return zero hits repo-wide post-fix.
+- Content scrub only; Pages/structural exposure itself is a separate follow-up.
+
 ## 2026-07-09 — Edict v2.0.0 + state normalization
 
 - Applied Edict v2.0.0: added managed `ROUTING_POLICY.md`, removed managed `MODEL_TIERS.md` (`managed_file_removal`, expected); hook unchanged.
