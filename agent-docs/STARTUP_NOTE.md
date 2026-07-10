@@ -16,16 +16,16 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 ## What Was Done
 
 - Confirmed the homelab site is a standalone Git repo with its own `.git`.
-- Verified runtime site files live inside this repo:
-  - `index.html`
-  - `css/homelab.css`
-  - `js/homelab.js`
-  - `assets/`
-  - `CNAME`
-  - `.nojekyll`
+- Verified runtime site files live inside this repo, published from `docs/`:
+  - `docs/index.html`
+  - `docs/css/homelab.css`
+  - `docs/js/homelab.js`
+  - `docs/assets/`
+  - `docs/CNAME`
+  - `docs/.nojekyll`
 - Added `.gitignore` for editor / OS junk.
 - Expanded `README.md` to define portability and separation rules.
-- Added `docs/MIGRATION.md` with a move and recovery checklist.
+- Added `agent-docs/MIGRATION.md` with a move and recovery checklist.
 - Added `scripts/verify-standalone.sh` to validate portability assumptions quickly.
 - Updated the parent repo's `homelab.html` redirect to use `https://homelab.starlightdaemon.dev/` instead of the old `homelab/` path.
 
@@ -39,7 +39,7 @@ The goal is to keep `homelab.starlightdaemon.dev` self-contained so a future age
 
 - `bash scripts/verify-standalone.sh` passes.
 - Runtime files do not reference `<StarlightDaemonDev-repo-root>`.
-- Lucide icons are rendered locally from `js/homelab.js`; there is no third-party icon script dependency.
+- Lucide icons are rendered locally from `docs/js/homelab.js`; there is no third-party icon script dependency.
 - The main homepage card already points to `https://homelab.starlightdaemon.dev`.
 - The old redirect page now points to the custom domain.
 
@@ -63,5 +63,5 @@ There are no intentional outbound runtime dependencies beyond the canonical site
 ## Caution
 
 - Treat this repo as the source of truth and touch the parent workspace only when a parent-site change is intentional.
-- The live site runtime is operator-locked. Do not edit `index.html`, `css/homelab.css`, `js/homelab.js`, or anything under `assets/` unless the operator explicitly says to.
-- Read `docs/OPERATOR_LOCK.md` before starting work that might affect the live site.
+- The live site runtime is operator-locked. Do not edit `docs/index.html`, `docs/css/homelab.css`, `docs/js/homelab.js`, or anything under `docs/assets/` unless the operator explicitly says to.
+- Read `agent-docs/OPERATOR_LOCK.md` before starting work that might affect the live site.

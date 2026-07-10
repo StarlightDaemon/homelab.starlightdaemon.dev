@@ -8,12 +8,12 @@ cd "$repo_root"
 command -v rg > /dev/null 2>&1 || { echo "error: rg (ripgrep) required"; exit 1; }
 
 required_files=(
-  "index.html"
-  "CNAME"
-  ".nojekyll"
-  "css/homelab.css"
-  "js/homelab.js"
-  "assets/thinker-logo.png"
+  "docs/index.html"
+  "docs/CNAME"
+  "docs/.nojekyll"
+  "docs/css/homelab.css"
+  "docs/js/homelab.js"
+  "docs/assets/thinker-logo.png"
 )
 
 echo "Checking required files..."
@@ -25,7 +25,7 @@ for path in "${required_files[@]}"; do
 done
 
 echo "Checking runtime files for parent-workspace references..."
-if rg -n "/Users/|file://|href=[\"']/|src=[\"']/|url\(/" index.html css js >/tmp/homelab-verify-rg.txt 2>/dev/null; then
+if rg -n "/Users/|file://|href=[\"']/|src=[\"']/|url\(/" docs/index.html docs/css docs/js >/tmp/homelab-verify-rg.txt 2>/dev/null; then
   cat /tmp/homelab-verify-rg.txt >&2
   echo "Found workspace-specific references." >&2
   exit 1
@@ -35,7 +35,7 @@ echo "Checking runtime files for unexpected outbound URLs..."
 outbound_urls=()
 while IFS= read -r line; do
   outbound_urls+=("$line")
-done < <(rg -o --no-filename "https?://[^\"' )]+" index.html css js | sort -u)
+done < <(rg -o --no-filename "https?://[^\"' )]+" docs/index.html docs/css docs/js | sort -u)
 
 unexpected_urls=()
 for url in "${outbound_urls[@]}"; do
@@ -55,7 +55,7 @@ if (( ${#unexpected_urls[@]} > 0 )); then
 fi
 
 echo "Checking CNAME..."
-if [[ "$(tr -d '\r\n' < CNAME)" != "homelab.starlightdaemon.dev" ]]; then
+if [[ "$(tr -d '\r\n' < docs/CNAME)" != "homelab.starlightdaemon.dev" ]]; then
   echo "Unexpected CNAME value." >&2
   exit 1
 fi

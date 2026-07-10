@@ -9,7 +9,7 @@ The repo is expected to stay self-contained:
 - All site files live inside this repository.
 - Local assets are referenced relative to the repo.
 - No runtime dependency should exist on `<StarlightDaemonDev-repo-root>` or the parent site repo.
-- GitHub Pages deployment is driven by `CNAME` and the repository contents only.
+- GitHub Pages deployment is driven by `docs/CNAME` and the contents of `docs/` only (Pages source: `main` / `/docs`).
 
 ## Fast Reboot Steps
 
@@ -17,7 +17,7 @@ The repo is expected to stay self-contained:
 2. Confirm the custom domain file exists:
 
    ```bash
-   cat CNAME
+   cat docs/CNAME
    ```
 
 3. Run the standalone verification script:
@@ -36,12 +36,12 @@ The repo is expected to stay self-contained:
 
 ## What To Check After The Move
 
-- `index.html` loads without missing CSS, JS, or image assets.
-- The brand logo loads from `assets/thinker-logo.png`.
-- Tool icons load from `assets/tool-icons/`.
+- `docs/index.html` loads without missing CSS, JS, or image assets.
+- The brand logo loads from `docs/assets/thinker-logo.png`.
+- Tool icons load from `docs/assets/tool-icons/`.
 - Mobile navigation still opens and closes.
 - Workflow tabs still switch content correctly.
-- `CNAME` still contains `homelab.starlightdaemon.dev`.
+- `docs/CNAME` still contains `homelab.starlightdaemon.dev`.
 
 ## GitHub Pages Notes
 

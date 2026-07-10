@@ -11,8 +11,8 @@ Your job is to continue hardening this standalone homelab repo so it can be clon
 Start by reading:
 
 - `README.md`
-- `docs/STARTUP_NOTE.md`
-- `docs/MIGRATION.md`
+- `agent-docs/STARTUP_NOTE.md`
+- `agent-docs/MIGRATION.md`
 
 Then do this immediately:
 
@@ -23,7 +23,7 @@ Then do this immediately:
 Current known state:
 
 - The homelab site is already self-contained at the repo level.
-- Runtime files are inside this repo: `index.html`, `css/`, `js/`, `assets/`, `CNAME`, `.nojekyll`.
+- Runtime files are published from `docs/`: `docs/index.html`, `docs/css/`, `docs/js/`, `docs/assets/`, `docs/CNAME`, `docs/.nojekyll`. GitHub Pages source is `main` / `/docs`.
 - The verification script currently passes.
 - The parent repo homepage card already links to `https://homelab.starlightdaemon.dev`.
 - The old parent repo redirect file `<StarlightDaemonDev-repo-root>/homelab.html` was updated to point to the custom domain instead of the old `homelab/` path.
@@ -34,7 +34,7 @@ Constraints:
 - Do not introduce dependencies on `<StarlightDaemonDev-repo-root>`.
 - Keep local asset references relative.
 - This repo is already extracted from the parent workspace.
-- The live site runtime is operator-locked. Do not edit `index.html`, `css/homelab.css`, `js/homelab.js`, or anything under `assets/` unless the operator explicitly approves it.
+- The live site runtime is operator-locked. Do not edit `docs/index.html`, `docs/css/homelab.css`, `docs/js/homelab.js`, or anything under `docs/assets/` unless the operator explicitly approves it.
 - Use `network-map/` for separate topology, diagram, and draft work until integration is explicitly requested.
 - If you also touch the old parent workspace, do not revert unrelated changes there.
 

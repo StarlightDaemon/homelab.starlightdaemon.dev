@@ -44,6 +44,15 @@
 - Replaced local overlay `MODEL_MAP.md` with `ROUTING.md` (routing ladder, R1-R4 plus offload pool).
 - Normalized state files per the Fact-Home Rule: removed hand-written "Last updated" footer and the restated Edict-version claim from `CURRENT_STATE.md`; converted its loop-status restatement to a bare `OL-001` citation.
 
+## 2026-07-09 — Pages source moved to /docs; repo-internal paths de-published
+
+- Restructured the repo so GitHub Pages serves `docs/` instead of the repo root, so `.raiden/` and other repo-internal paths stop being live-served alongside the site.
+- Moved live runtime files into `docs/`: `index.html`, `CNAME`, `.nojekyll`, `robots.txt`, `css/`, `js/`, `assets/`.
+- Found a pre-existing, unrelated `docs/` directory containing repo-internal agent handoff notes (`MIGRATION.md`, `NEXT_AGENT_PROMPT.md`, `OPERATOR_LOCK.md`, `STARTUP_NOTE.md`) that collided with the new site directory. Relocated it to `agent-docs/` and updated all cross-references (`README.md`, the relocated files themselves, `CURRENT_STATE.md`).
+- Deliberately did **not** move `network-map/` into `docs/`, despite it being named as site content in the dispatch instructions: D-003 and OL-001 both gate `network-map/` integration into the live site on explicit operator approval, which has not been given. Moving it into the published tree would have completed that integration without the required approval. Left it at repo root, unpublished, as before.
+- Updated `scripts/verify-standalone.sh` (and implicitly its CI workflow) to check `docs/index.html`, `docs/css/`, `docs/js/`, `docs/assets/`, `docs/CNAME`, `docs/.nojekyll` instead of the old root-level paths.
+- Flipped the Pages API config (`source.branch=main`, `source.path=/docs`) and verified the change via `gh api .../pages`.
+
 ## Pre-RAIDEN notable events
 
 - Repo decoupled from starlightdaemon.dev submodule; standalone deployment established.
