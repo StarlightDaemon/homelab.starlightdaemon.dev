@@ -52,7 +52,7 @@ There are no intentional outbound runtime dependencies beyond the canonical site
 1. `cd <repo-root>`
 2. `git status`
 3. `bash scripts/verify-standalone.sh`
-4. `python3 -m http.server 8123`
+4. `python3 -m http.server 8123 --bind 127.0.0.1 --directory docs`
 5. Open `http://127.0.0.1:8123/`
 
 ## Good Next Steps

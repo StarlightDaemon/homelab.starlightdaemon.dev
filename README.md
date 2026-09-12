@@ -41,7 +41,7 @@ This repo is intended to remain portable and independently deployable. The site 
 ## Local Preview
 
 ```bash
-python3 -m http.server 8123
+python3 -m http.server 8123 --bind 127.0.0.1 --directory docs
 ```
 
 Open `http://127.0.0.1:8123/`.
@@ -55,6 +55,11 @@ bash scripts/verify-standalone.sh
 ```
 
 This confirms required files exist, the `CNAME` value is correct, no workspace-specific references were introduced, and no unexpected outbound runtime URLs were added.
+
+## Security and Third-Party Assets
+
+- `SECURITY.md` records the public-data boundary and hosting-header limitations.
+- `THIRD_PARTY_NOTICES.md` records the ownership and repository provenance of bundled product icons.
 
 ## CI
 
