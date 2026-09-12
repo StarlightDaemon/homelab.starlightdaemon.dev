@@ -8,6 +8,23 @@ Thumbs.db
 
 *.log
 
+# Local secrets and private key material
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.keystore
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+credentials.json
+service-account*.json
+
 # RAIDEN audit outputs — operational findings, not framework content
 audit-reports/
 .raiden/state/AUDIT_LOG.md
