@@ -18,7 +18,7 @@ Then do this immediately:
 
 1. Run `git status` inside `<repo-root>`
 2. Run `bash scripts/verify-standalone.sh`
-3. If needed, start a preview server with `python3 -m http.server 8123`
+3. If needed, start a preview server with `python3 -m http.server 8123 --bind 127.0.0.1 --directory docs`
 
 Current known state:
 

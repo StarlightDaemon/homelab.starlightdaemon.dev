@@ -29,7 +29,7 @@ The repo is expected to stay self-contained:
 4. Start a local preview server:
 
    ```bash
-   python3 -m http.server 8123
+   python3 -m http.server 8123 --bind 127.0.0.1 --directory docs
    ```
 
 5. Open `http://127.0.0.1:8123/`.

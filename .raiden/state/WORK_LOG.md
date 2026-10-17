@@ -1,5 +1,16 @@
 # Work Log
 
+## 2026-09-06 — Workspace audit remediation
+
+- Remediated all seven findings from `audit-reports/audit-2026-09-06-4aa0424.md` under explicit operator direction.
+- Restricted every documented preview command to the `docs/` tree on `127.0.0.1`; a contained local test returned the site at `/` and `404` for `/.raiden/README.md`.
+- Updated `actions/checkout` from pinned v4.3.1 to pinned v7.0.1, set `contents: read`, and disabled persisted checkout credentials.
+- Added secret-file ignore patterns with explicit exceptions for shareable environment templates.
+- Removed the ineffective meta-delivered `frame-ancestors` directive and documented the GitHub Pages limitation, current low-risk acceptance, and required future response header in `SECURITY.md`.
+- Confirmed the site is an intentionally public architecture reference, changed the conflicting footer label, and documented the public-data boundary.
+- Added `THIRD_PARTY_NOTICES.md` with repository provenance, official owner references, checksums, and an explicit statement that the original download URLs were not retained.
+- Expanded `scripts/verify-standalone.sh` to prevent regressions across the remediated controls. The full verification suite, JavaScript syntax check, Gitleaks working-tree scan, external notice-link check, and contained preview test passed.
+
 ## 2026-05-15 — RAIDEN state population
 
 - State files populated from README, git history, and CI configuration.
