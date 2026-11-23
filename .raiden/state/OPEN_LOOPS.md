@@ -1,9 +1,15 @@
 # Open Loops
 
+<!-- Statuses: open · deferred · held: <who> · no-action · accepted · closed. Each active item: ID, status, gate owner, next step or restart condition, evidence. IDs never change or get reused. Entries below stay in their original order. -->
+
+## Active
+
+- **OL-001 · held: owner · gate: owner** · Integrate the network map into the live site. Restarts when: the owner reviews `network-map/` and approves integration (the live files are locked until then). OL-002 is closed.
+
 ## OL-001
 
 - Title: Network map integration into live site
-- Status: Open
+- Status: held: owner (review and approval of `network-map/`)
 - Gate: operator
 - Why it matters: `network-map/` contains topology drafts that represent the intended live state of the site's network section, but they have not yet been reviewed and approved for integration.
 - Owner: operator review required before integration; agent can do the work once approved.
@@ -12,7 +18,7 @@
 ## OL-002
 
 - Title: Pages/structural exposure follow-up from the 2026-07-09 live-exposure scrub
-- Status: **Closed 2026-07-26 — resolved (verified, not assumed).**
+- Status: **closed 2026-07-26 — resolved (verified, not assumed).**
 - Origin: the 2026-07-09 live-exposure scrub recorded in `WORK_LOG.md` ended
   with "Content scrub only; Pages/structural exposure itself is a separate
   follow-up." That follow-up was tracked in no loop and no decision — the
