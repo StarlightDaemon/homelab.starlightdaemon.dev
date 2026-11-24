@@ -9,6 +9,7 @@ command -v rg > /dev/null 2>&1 || { echo "error: rg (ripgrep) required"; exit 1;
 
 required_files=(
   "docs/index.html"
+  "docs/robots.txt"
   "docs/CNAME"
   "docs/.nojekyll"
   "docs/css/homelab.css"
@@ -90,6 +91,36 @@ rg -Fq "Public Architecture Reference" docs/index.html || {
 
 rg -Fq "frame-ancestors 'none'" SECURITY.md || {
   echo "Missing response-header guidance in SECURITY.md" >&2
+  exit 1
+}
+
+echo "Checking published site discovery and accessibility foundations..."
+rg -Fq '<title>StarlightDaemon Homelab</title>' docs/index.html || {
+  echo "Missing canonical page title." >&2
+  exit 1
+}
+rg -Fq '<meta name="description" content=' docs/index.html || {
+  echo "Missing search description." >&2
+  exit 1
+}
+rg -Fq '<link rel="canonical" href="https://homelab.starlightdaemon.dev/">' docs/index.html || {
+  echo "Missing canonical URL declaration." >&2
+  exit 1
+}
+rg -Fq '<meta property="og:title" content=' docs/index.html || {
+  echo "Missing Open Graph title." >&2
+  exit 1
+}
+rg -Fq '<a href="#main-content" class="skip-link">' docs/index.html || {
+  echo "Missing keyboard skip-navigation link." >&2
+  exit 1
+}
+rg -Fq '<main class="lab-main" id="main-content">' docs/index.html || {
+  echo "Missing skip-navigation target and main landmark." >&2
+  exit 1
+}
+rg -Fq 'User-agent: *' docs/robots.txt || {
+  echo "Missing crawler policy." >&2
   exit 1
 }
 
